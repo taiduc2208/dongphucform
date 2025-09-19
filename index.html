@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form đăng ký đồng phục</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- jQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Slick -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <link rel="stylesheet" href="./jquery.fancybox.min.css">
+  <link rel="stylesheet" href="./modal-video.min.css">
+  <link rel="stylesheet" href="slide.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Header Section -->
+  <header class="bg-blue-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+      <div class="flex items-center justify-between">
+        <!-- Logo Section -->
+        <div class="flex-shrink-0">
+          <a href="#" class="text-2xl font-bold">Thamdongphuc </a>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="hidden md:flex space-x-10 text-lg">
+          <a href="/index.html" class="hover:text-gray-300 transition-all">Trang chủ</a>
+          <a href="#services" class="hover:text-gray-300 transition-all">Mẫu áo</a>
+          <a href="./form.html" class="hover:text-gray-300 transition-all">Đăng ký áo</a>
+          <a href="./link.html" class="hover:text-gray-300 transition-all">Tạo form đăng ký áo</a>
+        </nav>
+
+        <!-- Call-to-Action Button -->
+        <div class="hidden md:block">
+          <a href="#"
+            class="bg-yellow-500 hover:bg-yellow-400 text-black py-2 px-6 rounded-full text-lg transition-all">
+            Nhận báo giá
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button (for smaller screens) -->
+        <div class="md:hidden flex items-center">
+          <button id="menu-button" class="text-white focus:outline-none">
+            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Menu -->
+      <div id="mobile-menu" class="md:hidden mt-5 hidden space-y-4">
+        <a href="/index.html" class="block text-lg hover:text-gray-300 transition-all">Trang chủ</a>
+        <a href="#services" class="block text-lg hover:text-gray-300 transition-all">Mẫu áo</a>
+        <a href="./form.html" class="block text-lg hover:text-gray-300 transition-all">Đăng ký áo</a>
+        <a href="./link.html" class="block text-lg hover:text-gray-300 transition-all">Tạo form đăng ký áo</a>
+      </div>
+    </div>
+  </header>
+
+  <script>
+    // Mobile Menu Toggle
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+    <section class="coordination" id="services">
+    <div class="l-inner">
+      <div class="sec__body seifuku__body basic-style">
+        <h3 class="coordination__subheading">
+          <span class="-en">BASIC STYLE</span>
+        </h3>
+        <div class="seifuku__content">
+          <!-- Slider -->
+          <div class="seifuku__slider w-full max-w-6xl mx-auto">
+            <!-- Main Slider -->
+            <div class="seifuku__mainsliderWrap">
+              <div class="slider seifuku__mainslider js-seifukuMainSlider">
+                <!-- JS sẽ thêm slide bằng createSeifukuSlider() -->
+              </div>
+    
+              <!-- Arrows -->
+              <div class="seifuku__mainslider__arrows -seifuku">
+                <div
+                  class="seifuku__mainslider__arrow--prev slick-arrow absolute left-2 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center cursor-pointer z-10">
+                  <span class="icon__arrow-left-lg"></span>
+                </div>
+                <div
+                  class="seifuku__mainslider__arrow--next slick-arrow absolute right-2 top-1/2 transform -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow flex items-center justify-center cursor-pointer z-10">
+                  <span class="icon__arrow-right-lg"></span>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Thumbnail Slider -->
+            <div class="seifuku__thumbsliderWrap mt-4">
+              <div class="slider seifuku__thumbslider js-seifukuThumbSlider">
+                <!-- JS sẽ thêm thumbnail -->
+              </div>
+    
+              <!-- Thumbnail Arrows -->
+              <div class="seifuku__thumbslider__arrows -seifuku">
+                <div class="seifuku__thumbslider__arrow--prev slick-arrow ">
+                  <span class="icon__arrow-left-lg"></span>
+                </div>
+                <div class="seifuku__thumbslider__arrow--next slick-arrow ">
+                  <span class="icon__arrow-right-lg"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="seifuku__detailWrap">
+            <p class="seifuku__detail__title">組み合わせは自由！</p>
+            <div class="seifuku__detail">
+              <dl class="coordination__desc -girls">
+                <dt class="coordination__terms"><span class="-title">女子生徒</span></dt>
+                <dd class="coordination__def">
+                  リボンとネクタイ<br>
+                  ブラウスはブルー・オフホワイト・ピンク<br>
+                  スカートは色違いのチェック柄<br>
+                  スラックスは男子と同柄あり
+                </dd>
+              </dl>
+              <div class="coordination__img">
+                <figure class="-img">
+                  <img src="https://www.meguro.ac.jp/websys2/wp-content/uploads/2023/05/seifuku_basic01.jpg" alt=""
+                    loading="lazy">
+                </figure>
+                <figure class="-img">
+                  <img src="https://www.meguro.ac.jp/websys2/wp-content/uploads/2023/05/seifuku_basic02.jpg" alt=""
+                    loading="lazy">
+                </figure>
+              </div>
+              <dl class="coordination__desc -boys">
+                <dt class="coordination__terms"><span class="-title">男子生徒</span></dt>
+                <dd class="coordination__def">
+                  シャツはブルー・オフホワイト
+                </dd>
+              </dl>
+              <div class="coordination__img">
+                <figure class="-img">
+                  <img src="https://www.meguro.ac.jp/websys2/wp-content/uploads/2023/05/seifuku_basic03.jpg" alt=""
+                    loading="lazy">
+                </figure>
+                <figure class="-img">
+                  <img src="https://www.meguro.ac.jp/websys2/wp-content/uploads/2023/05/seifuku_basic04.jpg" alt=""
+                    loading="lazy">
+                </figure>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+<script src="./jquery-modal-video.min.js"></script>
+<script src="./jquery.fancybox.min.js"></script>
+<script src="./slide.js"></script>
+<script src="./slick.js"></script>
+
+</html>
