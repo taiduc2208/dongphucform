@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Upload đơn hàng Excel</title>
+  <!-- use version 0.20.3 -->
+  <script type="text/javascript" src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f8f8f8;
+      padding: 20px;
+    }
+
+    .drop_box {
+      border: 3px dashed #aaa;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      background: #fff;
+      max-width: 600px;
+      margin: auto;
+      cursor: pointer;
+    }
+
+    .drop_box.dragover {
+      background: #e3f0ff;
+    }
+
+    #log {
+      margin-top: 20px;
+      max-width: 600px;
+      margin: auto;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      background: #005af0;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2 style="text-align:center;">Upload đơn hàng Excel (XLSX/XLS)</h2>
+
+  <div class="drop_box" id="dropArea">
+    <p>Kéo thả file vào đây hoặc click để chọn file</p>
+    <input type="file" id="excelFile" accept=".xlsx,.xls" style="display:none;">
+  </div>
+  <button class="btn" id="processFile">Xử lý file</button>
+
+  <div id="log"></div>
+
+  <script>
+    const dropArea = document.getElementById('dropArea');
+    const fileInput = document.getElementById('excelFile');
+    let selectedFile = null;
+
+    // Drag & Drop events
+    ['dragenter', 'dragover'].forEach(evt => {
+      dropArea.addEventListener(evt, e => {
+        e.preventDefault();
+        dropArea.classList.add('dragover');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(evt => {
+      dropArea.addEventListener(evt, e => {
+        e.preventDefault();
+        dropArea.classList.remove('dragover');
+      });
+    });
+
+    dropArea.addEventListener('drop', e => {
+      e.preventDefault();
+      if (e.dataTransfer.files.length) {
+        selectedFile = e.dataTransfer.files[0];
+        dropArea.querySelector('p').textContent = selectedFile.name;
+      }
+    });
+
+    // Click to open file picker
+    dropArea.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', e => {
+      if (e.target.files.length) {
+        selectedFile = e.target.files[0];
+        dropArea.querySelector('p').textContent = selectedFile.name;
+      }
+    });
+
+    // Bảng cân nặng → size tham khảo (28–44)
+    const weightSizeMap = [
+      // Lớp 1–5 (tiểu học)
+      {
+        max: 17,
+        size: 29
+      },
+      {
+        max: 20,
+        size: 30
+      },
+      {
+        max: 23,
+        size: 31
+      },
+      {
+        max: 27,
+        size: 32
+      },
+      {
+        max: 31,
+        size: 33
+      },
+      {
+        max: 35,
+        size: 34
+      },
+      {
+        max: 39,
+        size: 35
+      },
+      {
+        max: 43,
+        size: 36
+      },
+      {
+        max: 47,
+        size: 37
+      },
+      {
+        max: 50,
+        size: 38
+      },
+
+      // Lớp 6–9 (THCS)
+      {
+        max: 55,
+        size: 39
+      },
+      {
+        max: 60,
+        size: 40
+      },
+      {
+        max: 65,
+        size: 41
+      },
+      {
+        max: 70,
+        size: 42
+      },
+      {
+        max: 75,
+        size: 43
+      },
+      {
+        max: 80,
+        size: 44
+      },
+
+      // Lớp 10–12 (THPT)
+      {
+        max: Infinity,
+        size: 44
+      } // nặng hơn vẫn size 44
+    ];
+
+    // Hàm tính BMI
+    function calculateBMI(heightCm, weightKg) {
+      if (!heightCm || !weightKg) return null;
+      const heightM = heightCm / 100;
+      return weightKg / (heightM * heightM);
+    }
+
+    // Lấy size cơ bản theo cân nặng
+    function getBaseSize(weightKg) {
+      for (const item of weightSizeMap) {
+        if (weightKg <= item.max) return item.size;
+      }
+      return 44; // fallback
+    }
+
+    // Tính size cuối cùng với điều chỉnh BMI ±1
+    function getAdjustedSize(heightCm, weightKg) {
+      const baseSize = getBaseSize(weightKg);
+      const bmi = calculateBMI(heightCm, weightKg);
+      if (!bmi) return baseSize;
+
+      let adjust = 0;
+      if (bmi < 18.5) adjust = -1; // gầy → giảm 1 size
+      else if (bmi > 25) adjust = 1; // thừa cân → +1 size
+
+      let finalSize = baseSize + adjust;
+
+      // Giới hạn size 28–44
+      if (finalSize < 28) finalSize = 28;
+      if (finalSize > 44) finalSize = 44;
+
+      return finalSize;
+    }
+
+    // Process file
+    $("#processFile").click(function () {
+      if (!selectedFile) {
+        alert("Chọn file trước!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const data = new Uint8Array(e.target.result);
+        const workbook = XLSX.read(data, { type: 'array' });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const rows = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+
+        if (!rows.length) {
+          alert("File rỗng");
+          return;
+        }
+
+        $("#log").html(`Đang gửi ${rows.length} đơn...<br>`);
+
+        rows.forEach((row, index) => {
+          const heightCm = parseFloat(row["Chiều cao (cm)"] || 0);
+          const weightKg = parseFloat(row["Cân nặng (kg)"] || 0);
+          const predictedSize = heightCm && weightKg ? getAdjustedSize(heightCm, weightKg) : '';
+          const formData = {
+            token: "tham0501_an3008_abu2208",
+            school_name: row["Trường"] || '',
+            parent_name: row["Tên phụ huynh"] || '',
+            student_name: row["Tên học sinh"] || '',
+            gender: (row["Giới tính"] || '').toLowerCase() === 'nam' ? 'male' : 'female',
+            grade: row["Khối"] || '',
+            class: row["Lớp"] || '',
+            height: heightCm,
+            weight: weightKg,
+            style: 'bth',
+            message: '',
+            qty_coctay: row["Số lượng cộc tay"] || 0,
+            qty_daitay: row["Số lượng dài tay"] || 0,
+            qty_khoac: row["Số lượng áo khoác"] || 0,
+            qty_codo: row["Số lượng áo cờ đỏ"] || 0,
+            size: predictedSize
+          };
+          fetch("/api/submit_order.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+          })
+            .then(res => res.json())
+            .then(res => {
+              $("#log").append(`Hàng ${index + 1}: ${res.status === 'success' ? `OK, ID=${res.order_id}` : `Lỗi: ${res.message}`}<br>`);
+            })
+            .catch(err => {
+              $("#log").append(`Hàng ${index + 1}: Lỗi fetch<br>`);
+            });
+
+        });
+
+      };
+      reader.readAsArrayBuffer(selectedFile);
+    });
+  </script>
+
+</body>
+
+</html>
+
+<!-- fetch("/api/submit_order.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData)
+          })
+            .then(res => res.json())
+            .then(res => {
+              $("#log").append(`Hàng ${index + 1}: ${res.status === 'success' ? `OK, ID=${res.order_id}` : `Lỗi: ${res.message}`}<br>`);
+            })
+            .catch(err => {
+              $("#log").append(`Hàng ${index + 1}: Lỗi fetch<br>`);
+            }); -->

@@ -44,7 +44,7 @@
         <nav class="hidden md:flex space-x-10 text-lg">
           <a href="/index.html" class="hover:text-gray-300 transition-all">Trang chủ</a>
           <a href="#services" class="hover:text-gray-300 transition-all">Mẫu áo</a>
-          <a href="./form.html" class="hover:text-gray-300 transition-all">Đăng ký áo</a>
+          <a href="./form.php" class="hover:text-gray-300 transition-all">Đăng ký áo</a>
           <a href="./link.html" class="hover:text-gray-300 transition-all">Tạo form đăng ký áo</a>
         </nav>
 
@@ -71,7 +71,7 @@
       <div id="mobile-menu" class="md:hidden mt-5 hidden space-y-4">
         <a href="/index.html" class="block text-lg hover:text-gray-300 transition-all">Trang chủ</a>
         <a href="#services" class="block text-lg hover:text-gray-300 transition-all">Mẫu áo</a>
-        <a href="./form.html" class="block text-lg hover:text-gray-300 transition-all">Đăng ký áo</a>
+        <a href="./form.php" class="block text-lg hover:text-gray-300 transition-all">Đăng ký áo</a>
         <a href="./link.html" class="block text-lg hover:text-gray-300 transition-all">Tạo form đăng ký áo</a>
       </div>
     </div>
@@ -88,9 +88,15 @@
   </script>
 
   <!-- Form -->
+  <?php
+  session_start();
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+  ?>
   <div class="bg-white px-8 py-6 mx-auto my-8 max-w-2xl">
     <h2 class="text-2xl font-medium mb-4">Đăng ký đồng phục</h2>
-    <form>
+    <form id="orderForm" method="post">
+      <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
+      <input type="hidden" name="token" value="tham0501_an3008_abu2208">
       <div class="mb-4">
         <label for="school_name" class="block text-gray-700 font-medium mb-2">Trường</label>
         <input type="text" id="school_name" name="school_name"
@@ -103,8 +109,8 @@
           class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
       </div>
       <div class="mb-4">
-        <label for="name" class="block text-gray-700 font-medium mb-2">Tên học sinh</label>
-        <input type="text" id="name" name="name"
+        <label for="student_name" class="block text-gray-700 font-medium mb-2">Tên học sinh</label>
+        <input type="text" id="student_name" name="student_name"
           class="border border-gray-400 p-2 w-full rounded-lg focus:outline-none focus:border-blue-400" required>
       </div>
       <div class="mb-4">
@@ -233,63 +239,63 @@
   </div>
 </body>
 <script>
-function getQueryParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param);
-}
-
-function base64EncodeUnicode(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-
-function base64DecodeUnicode(str) {
-  return decodeURIComponent(escape(atob(str)));
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  const schoolEncoded = getQueryParam("school");
-  const type = getQueryParam("type");
-
-  const schoolInput = document.getElementById("school_name");
-  const schoolLabel = document.querySelector("label[for='school_name']");
-  const gradeSelect = document.getElementById("grade");
-
-  // Lưu danh sách option gốc
-  const allOptions = Array.from(gradeSelect.options);
-
-  if (schoolEncoded && type) {
-    // Decode tên trường
-    const schoolName = base64DecodeUnicode(schoolEncoded);
-    schoolInput.value = schoolName;
-    schoolInput.readOnly = true;
-
-    // Lọc các lớp theo type (iPhone Safari không hỗ trợ hidden)
-    gradeSelect.innerHTML = ""; // xóa hết
-    allOptions.forEach(opt => {
-      if (opt.value === "" || opt.dataset.type === type) {
-        gradeSelect.appendChild(opt);
-      }
-    });
-
-  } else {
-    // Không có param → nhập số điện thoại
-    schoolLabel.textContent = "Số điện thoại";
-    schoolInput.placeholder = "Nhập số điện thoại";
-    schoolInput.readOnly = false;
-    schoolInput.value = "";
-
-    // Reset select: append lại tất cả option
-    gradeSelect.innerHTML = "";
-    allOptions.forEach(opt => gradeSelect.appendChild(opt));
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
   }
-});
+
+  function base64EncodeUnicode(str) {
+    return btoa(unescape(encodeURIComponent(str)));
+  }
+
+  function base64DecodeUnicode(str) {
+    return decodeURIComponent(escape(atob(str)));
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const schoolEncoded = getQueryParam("school");
+    const type = getQueryParam("type");
+
+    const schoolInput = document.getElementById("school_name");
+    const schoolLabel = document.querySelector("label[for='school_name']");
+    const gradeSelect = document.getElementById("grade");
+
+    // Lưu danh sách option gốc
+    const allOptions = Array.from(gradeSelect.options);
+
+    if (schoolEncoded && type) {
+      // Decode tên trường
+      const schoolName = base64DecodeUnicode(schoolEncoded);
+      schoolInput.value = schoolName;
+      schoolInput.readOnly = true;
+
+      // Lọc các lớp theo type (iPhone Safari không hỗ trợ hidden)
+      gradeSelect.innerHTML = ""; // xóa hết
+      allOptions.forEach(opt => {
+        if (opt.value === "" || opt.dataset.type === type) {
+          gradeSelect.appendChild(opt);
+        }
+      });
+
+    } else {
+      // Không có param → nhập số điện thoại
+      schoolLabel.textContent = "Số điện thoại";
+      schoolInput.placeholder = "Nhập số điện thoại";
+      schoolInput.readOnly = false;
+      schoolInput.value = "";
+
+      // Reset select: append lại tất cả option
+      gradeSelect.innerHTML = "";
+      allOptions.forEach(opt => gradeSelect.appendChild(opt));
+    }
+  });
 </script>
 <script>
   const gradeSelect = document.getElementById("grade");
   const classSelect = document.getElementById("class");
   const customClassWrapper = document.getElementById("customClassWrapper");
 
-  gradeSelect.addEventListener("change", function () {
+  gradeSelect.addEventListener("change", function() {
     const grade = this.value;
     classSelect.innerHTML = '<option value="">Chọn lớp chi tiết</option>';
 
@@ -314,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("customClass").value = "";
   });
 
-  classSelect.addEventListener("change", function () {
+  classSelect.addEventListener("change", function() {
     if (this.value === "other") {
       customClassWrapper.classList.remove("hidden");
     } else {
@@ -329,7 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Ẩn/hiện input số lượng theo từng checkbox
   typeCheckboxes.forEach(cb => {
-    cb.addEventListener("change", function () {
+    cb.addEventListener("change", function() {
       const qtyInput = document.getElementById("qty-" + this.value);
       if (this.checked) {
         qtyInput.classList.remove("hidden");
@@ -343,7 +349,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Xử lý khi chọn "Không đăng ký loại nào"
-  noneCheckbox.addEventListener("change", function () {
+  noneCheckbox.addEventListener("change", function() {
     if (this.checked) {
       typeCheckboxes.forEach(cb => {
         cb.checked = false;
@@ -358,6 +364,161 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       typeCheckboxes.forEach(cb => cb.disabled = false);
     }
+  });
+</script>
+<script>
+  // Bảng cân nặng → size tham khảo (28–44)
+  const weightSizeMap = [
+    // Lớp 1–5 (tiểu học)
+    {
+      max: 17,
+      size: 29
+    },
+    {
+      max: 20,
+      size: 30
+    },
+    {
+      max: 23,
+      size: 31
+    },
+    {
+      max: 27,
+      size: 32
+    },
+    {
+      max: 31,
+      size: 33
+    },
+    {
+      max: 35,
+      size: 34
+    },
+    {
+      max: 39,
+      size: 35
+    },
+    {
+      max: 43,
+      size: 36
+    },
+    {
+      max: 47,
+      size: 37
+    },
+    {
+      max: 50,
+      size: 38
+    },
+
+    // Lớp 6–9 (THCS)
+    {
+      max: 55,
+      size: 39
+    },
+    {
+      max: 60,
+      size: 40
+    },
+    {
+      max: 65,
+      size: 41
+    },
+    {
+      max: 70,
+      size: 42
+    },
+    {
+      max: 75,
+      size: 43
+    },
+    {
+      max: 80,
+      size: 44
+    },
+
+    // Lớp 10–12 (THPT)
+    {
+      max: Infinity,
+      size: 44
+    } // nặng hơn vẫn size 44
+  ];
+
+  // Hàm tính BMI
+  function calculateBMI(heightCm, weightKg) {
+    if (!heightCm || !weightKg) return null;
+    const heightM = heightCm / 100;
+    return weightKg / (heightM * heightM);
+  }
+
+  // Lấy size cơ bản theo cân nặng
+  function getBaseSize(weightKg) {
+    for (const item of weightSizeMap) {
+      if (weightKg <= item.max) return item.size;
+    }
+    return 44; // fallback
+  }
+
+  // Tính size cuối cùng với điều chỉnh BMI ±1
+  function getAdjustedSize(heightCm, weightKg) {
+    const baseSize = getBaseSize(weightKg);
+    const bmi = calculateBMI(heightCm, weightKg);
+    if (!bmi) return baseSize;
+
+    let adjust = 0;
+    if (bmi < 18.5) adjust = -1; // gầy → giảm 1 size
+    else if (bmi > 25) adjust = 1; // thừa cân → +1 size
+
+    let finalSize = baseSize + adjust;
+
+    // Giới hạn size 28–44
+    if (finalSize < 28) finalSize = 28;
+    if (finalSize > 44) finalSize = 44;
+
+    return finalSize;
+  }
+  $("#orderForm").submit(function(e) {
+    e.preventDefault();
+
+    // Lấy dữ liệu form
+    const formData = {};
+    $(this).serializeArray().forEach(item => {
+      formData[item.name] = item.value;
+    });
+
+    const height = parseFloat(formData['height']);
+    const weight = parseFloat(formData['weight']);
+    const bmi = calculateBMI(height, weight);
+    formData['size'] = getAdjustedSize(bmi);
+    // Thêm items (số lượng áo)
+    ["coctay", "daitay", "khoac", "codo"].forEach(type => {
+      const qty = $("#qty-" + type).val();
+      if (qty && parseInt(qty) > 0) {
+        formData["qty_" + type] = parseInt(qty);
+      }
+    });
+
+    // Gửi JSON
+    fetch("/api/submit_order.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(res => res.json())
+      .then(res => {
+        if (res.status === 'success') {
+          alert("Đơn hàng đã được ghi nhận, ID: " + res.order_id);
+          // location.reload();
+        } else {
+          alert("Lỗi: " + res.message);
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Có lỗi xảy ra");
+      });
   });
 </script>
 
