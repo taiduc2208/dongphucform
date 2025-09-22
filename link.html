@@ -21,7 +21,7 @@
 </head>
 
 <body class="bg-gray-50 min-h-screen">
-    <!-- Header Section -->
+  <!-- Header Section -->
   <header class="bg-blue-900 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
       <div class="flex items-center justify-between">
@@ -67,11 +67,11 @@
     </div>
   </header>
   <div class=" flex items-center justify-center p-6">
-    <div class="w-full max-w-xl bg-white shadow-xl rounded-2xl p-8">
+    <div class="w-full max-w-3xl bg-white shadow-xl rounded-2xl p-8">
       <h1 class="text-2xl font-extrabold mb-6 text-center">
         🎓 Tạo link <span class="text-blue-600">/form.php</span>
       </h1>
-  
+
       <form id="genForm" class="space-y-5">
         <!-- Tên trường -->
         <div>
@@ -79,7 +79,7 @@
           <input id="input-school" type="text" placeholder="VD: Trường Tiểu học Gia Thanh"
             class="w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400" />
         </div>
-  
+
         <!-- Loại -->
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Loại trường</label>
@@ -91,7 +91,7 @@
             <option value="3">Cấp 3 (Lớp 10-12)</option>
           </select>
         </div>
-  
+
         <!-- Nút -->
         <div class="flex gap-3">
           <button id="btnGenerate"
@@ -102,7 +102,7 @@
             class="px-4 py-3 rounded-lg border bg-gray-50 hover:bg-gray-100">Xoá</button>
         </div>
       </form>
-  
+
       <!-- Kết quả -->
       <div id="result" class="mt-6 hidden">
         <p class="text-sm text-gray-500 mb-2">Link đã tạo:</p>
@@ -112,9 +112,21 @@
           <a id="openLink" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600" target="_blank">Mở</a>
         </div>
       </div>
+      <div id="qrSection" class="mt-6 hidden">
+        <p class="text-sm text-gray-500 mb-2">QR code:</p>
+        <div class="flex flex-col items-center gap-3">
+          <div id="qrcode"></div>
+          <div class="flex gap-3">
+            <button id="btnCopyQR" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">Sao chép
+              QR</button>
+            <button id="btnDownloadQR" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Tải
+              QR</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
   <script>
     // Encode/Decode Unicode-safe
     function base64EncodeUnicode(str) {
@@ -156,6 +168,72 @@
       inputType.value = '';
       result.classList.add('hidden');
       resultInput.value = '';
+    });
+  </script>
+  <script>
+    const qrSection = document.getElementById('qrSection');
+    const qrcodeDiv = document.getElementById('qrcode');
+    const btnCopyQR = document.getElementById('btnCopyQR');
+    const btnDownloadQR = document.getElementById('btnDownloadQR');
+    let currentQRCanvas;
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      const school = inputSchool.value.trim();
+      const type = inputType.value;
+      if (!school || !type) {
+        alert('Vui lòng nhập tên trường và chọn loại.');
+        return;
+      }
+      const encoded = base64EncodeUnicode(school);
+      const url = `https://photo-event.unaux.com/form.php?school=${encodeURIComponent(encoded)}&type=${encodeURIComponent(type)}`;
+      resultInput.value = url;
+      openLink.href = url;
+      result.classList.remove('hidden');
+
+      // Tạo QR code
+      qrcodeDiv.innerHTML = '';
+      QRCode.toCanvas(url, { width: 180 }, function (err, canvas) {
+        if (err) console.error(err);
+        qrcodeDiv.appendChild(canvas);
+        currentQRCanvas = canvas;
+      });
+      qrSection.classList.remove('hidden');
+    });
+
+    // Copy QR image
+    btnCopyQR.addEventListener('click', async () => {
+      if (!currentQRCanvas) return;
+      currentQRCanvas.toBlob(async blob => {
+        try {
+          await navigator.clipboard.write([
+            new ClipboardItem({ 'image/png': blob })
+          ]);
+          btnCopyQR.textContent = '✅ Đã sao chép';
+          setTimeout(() => btnCopyQR.textContent = 'Sao chép QR', 1500);
+        } catch (err) {
+          console.error(err);
+          alert('Trình duyệt không hỗ trợ copy QR image trực tiếp');
+        }
+      });
+    });
+
+    // Download QR image
+    btnDownloadQR.addEventListener('click', () => {
+      if (!currentQRCanvas) return;
+      const link = document.createElement('a');
+      link.download = 'qrcode.png';
+      link.href = currentQRCanvas.toDataURL();
+      link.click();
+    });
+
+    btnClear.addEventListener('click', () => {
+      inputSchool.value = '';
+      inputType.value = '';
+      result.classList.add('hidden');
+      qrSection.classList.add('hidden');
+      resultInput.value = '';
+      qrcodeDiv.innerHTML = '';
     });
   </script>
 </body>
