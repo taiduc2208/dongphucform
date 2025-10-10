@@ -12,6 +12,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="header.css">
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
     rel="stylesheet">
@@ -25,39 +26,7 @@
 
 <body>
   <!-- Header Section -->
-  <header class="bg-primary text-white">
-    <div class="container d-flex flex-wrap align-items-center justify-content-between py-3">
-      <a href="/" class="text-white text-decoration-none fs-3 fw-bold">Thamdongphuc</a>
-
-      <!-- Navigation Menu -->
-      <ul class="nav d-none d-md-flex">
-        <li class="nav-item"><a href="/index.html" class="nav-link text-white">Trang chủ</a></li>
-        <li class="nav-item"><a href="#services" class="nav-link text-white">Mẫu áo</a></li>
-        <li class="nav-item"><a href="./form.php" class="nav-link text-white">Đăng ký áo</a></li>
-        <li class="nav-item"><a href="./link.html" class="nav-link text-white">Tạo form đăng ký áo</a></li>
-      </ul>
-
-      <!-- CTA Button -->
-      <a href="#" class="btn btn-warning text-dark d-none d-md-block">Nhận báo giá</a>
-
-      <!-- Mobile Menu Toggle -->
-      <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileMenu">
-        <svg class="bi" width="24" height="24" fill="currentColor">
-          <path d="M0 3h24v2H0zm0 7h24v2H0zm0 7h24v2H0z"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="collapse d-md-none bg-primary" id="mobileMenu">
-      <ul class="nav flex-column p-3">
-        <li class="nav-item"><a href="/index.html" class="nav-link text-white">Trang chủ</a></li>
-        <li class="nav-item"><a href="#services" class="nav-link text-white">Mẫu áo</a></li>
-        <li class="nav-item"><a href="./form.php" class="nav-link text-white">Đăng ký áo</a></li>
-        <li class="nav-item"><a href="./link.html" class="nav-link text-white">Tạo form đăng ký áo</a></li>
-      </ul>
-    </div>
-  </header>
+    <!--#include virtual="/inc/header.html" -->
 
   <!-- Form Section -->
   <div class="container my-5 d-flex justify-content-center">

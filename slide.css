@@ -2873,8 +2873,8 @@ main {
 @media print, screen and (min-width: 750px) {
   .hero {
     min-height: 536px;
-    background-image: url(../img/school/seifuku/hero_deco-front.png), url(../img/school/seifuku/hero_img.png), url(../img/school/seifuku/hero_deco-back.png),
-      url(../img/school/seifuku/hero_bg.png);
+    background-image: url(/img/hero_deco-front.png), url(/img/hero_img.png), url(/img/hero_deco-back.png),
+      url(/img/hero_bg.png);
     background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
   }
 }
@@ -2895,7 +2895,7 @@ main {
 
 @media screen and (max-width: 749px) {
   .hero {
-    background: url(../img/school/seifuku/hero_sp.png) no-repeat 50% 100% / cover;
+    background: url(/img/hero_sp.png) no-repeat 50% 100% / cover;
     text-align: center;
   }
 }
@@ -3334,76 +3334,6 @@ main {
   }
 }
 
-.coordination__head {
-  text-align: center;
-  z-index: 1;
-}
-
-@media print, screen and (min-width: 750px) {
-  .coordination__head {
-    position: relative;
-    padding-top: 8rem;
-  }
-
-  .coordination__head::before,
-  .coordination__head::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
-
-  .coordination__head::before {
-    left: -18rem;
-    top: 4.5rem;
-    background: url(../img/school/seifuku/coordination_deco01.svg) 0 100% / clamp(100px, 21.3%, 235px) auto no-repeat;
-    z-index: -1;
-  }
-
-  .coordination__head::after {
-    bottom: 0;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    background: url(../img/school/seifuku/coordination_img.png) 50% 100% / contain no-repeat;
-    z-index: 0;
-  }
-}
-
-@media screen and (max-width: 749px) {
-  .coordination__head {
-    width: 100vw;
-    margin-left: -1.5rem;
-    padding-top: 3.5rem;
-  }
-
-  .coordination__head::before {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    right: 0;
-    bottom: 0;
-    background: url(../img/school/seifuku/coordination_deco02.svg), url(../img/school/seifuku/coordination_deco04.svg);
-    background-position: 100% 40.7%, 101% 72.4%;
-    background-repeat: no-repeat, no-repeat;
-    background-size: 19.7% auto, 50% auto;
-  }
-}
-
-.coordination__heading {
-  position: relative;
-}
-
-@media print, screen and (min-width: 750px) {
-  .coordination__heading {
-    width: clamp(200px, 45%, 494px);
-    padding-bottom: 5rem;
-    margin: 0 auto;
-    left: 3rem;
-  }
-}
-
 .coordination__common,
 .seifuku__body,
 .coordination__col,
@@ -3436,44 +3366,11 @@ main {
 }
 
 .coordination-style,
-.etc-style,
-.summer-style,
 .basic-style {
   position: relative;
   z-index: 0;
 }
 
-@media print, screen and (min-width: 750px) {
-  .summer-style::before {
-    width: 14%;
-    left: -17%;
-    top: -9.5%;
-    background: url(../img/school/seifuku/coordination_deco03.svg) 50% 50% / contain no-repeat;
-  }
-}
-
-@media print, screen and (min-width: 750px) {
-  .etc-style::before {
-    width: 20%;
-    right: -15%;
-    top: -70%;
-    background: url(../img/school/seifuku/coordination_deco04.svg) 50% 50%/100% auto no-repeat;
-  }
-}
-
-@media screen and (min-width: 750px) and (max-width: 1023px) {
-  .etc-style::before {
-    top: -55.6%;
-  }
-}
-
-@media screen and (max-width: 749px) {
-  .etc-style::before {
-    right: -60%;
-    top: -53%;
-    background: url(../img/school/seifuku/coordination_deco04.svg) 50% 50%/21.3% auto no-repeat;
-  }
-}
 
 .coordination__subheading {
   display: -webkit-box;
@@ -3511,7 +3408,7 @@ main {
   transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  background: url(../img/school/seifuku/coordination_deco.svg) 50% 50% / contain no-repeat;
+  background: url(/img/coordination_deco.svg) 50% 50% / contain no-repeat;
 }
 
 .coordination__subheading .-en {
@@ -3567,18 +3464,6 @@ main {
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22276.62%22%20height%3D%2214.683%22%20viewBox%3D%220%200%20276.62%2014.683%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CclipPath%20id%3D%22clip-path%22%3E%0A%20%20%20%20%20%20%3Crect%20id%3D%22%E9%95%B7%E6%96%B9%E5%BD%A2_24869%22%20data-name%3D%22%E9%95%B7%E6%96%B9%E5%BD%A2%2024869%22%20width%3D%22276.49%22%20height%3D%229.859%22%20fill%3D%22%23dc94b7%22%2F%3E%0A%20%20%20%20%3C%2FclipPath%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Cg%20id%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97_16935%22%20data-name%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%2016935%22%20transform%3D%22matrix(1%2C%200.017%2C%20-0.017%2C%201%2C%200.172%2C%200)%22%3E%0A%20%20%20%20%3Cg%20id%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97_16934%22%20data-name%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%2016934%22%20transform%3D%22translate(0%200)%22%20clip-path%3D%22url(%23clip-path)%22%3E%0A%20%20%20%20%20%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_24190%22%20data-name%3D%22%E3%83%91%E3%82%B9%2024190%22%20d%3D%22M43.405%2C7.577c1.151-.044%2C2.043-.047%2C2.877-.115C57.759%2C6.507%2C69.537%2C5.991%2C81.2%2C5.321c9.948-.573%2C19.971-1.036%2C29.989-1.5%2C10.709-.5%2C21.418-.989%2C32.173-1.378q13-.471%2C26.089-.758c9.937-.208%2C19.884-.288%2C29.819-.366%2C9.068-.071%2C18.138-.282%2C27.242-.067%2C4.32.1%2C8.713-.054%2C13.069-.116%2C1.031-.014%2C2.065-.1%2C3.068-.187C243.513.874%2C244.3.719%2C244.112.4c-.178-.3-.983-.423-1.944-.4-2.261.057-4.525.181-6.786.186-7.7.019-15.4-.017-23.1%2C0-15.394.027-30.794.108-46.126.569q-17.437.523-34.827%2C1.186c-15.091.566-30.176%2C1.139-45.169%2C1.926-12.4.651-24.874%2C1.176-37.134%2C2.057-2.031.146-4.03.344-5.995.562-1.283.142-2%2C.508-1.466.707a13.972%2C13.972%2C0%2C0%2C0%2C1.839.386%22%20transform%3D%22translate(32.348%200)%22%20fill%3D%22%23dc94b7%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_24191%22%20data-name%3D%22%E3%83%91%E3%82%B9%2024191%22%20d%3D%22M19.532%2C9.757c1.062.665%2C1.782.32%2C3.369.161%2C2.818-.283%2C5.674-.533%2C8.484-.824C41.8%2C8.018%2C52.384%2C7.126%2C62.857%2C6.1%2C70%2C5.4%2C77.48%2C5.084%2C84.7%2C4.459c1.676-.145%2C3.333-.31%2C4.949-.5.349-.043.682-.254.641-.376s-.515-.285-.9-.314a24.754%2C24.754%2C0%2C0%2C0-3.034-.1c-3.278.171-6.606.316-9.754.62Q59.391%2C5.447%2C42.277%2C7.212q-9.2.931-18.33%2C1.91c-1.441.154-2.779.4-4.415.635%22%20transform%3D%22translate(15.265%20-1.468)%22%20fill%3D%22%23dc94b7%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_24192%22%20data-name%3D%22%E3%83%91%E3%82%B9%2024192%22%20d%3D%22M90.6%2C5.074a9.017%2C9.017%2C0%2C0%2C1-2.238.943A42.726%2C42.726%2C0%2C0%2C1%2C84.1%2C6.4C68.732%2C7.443%2C53.316%2C8.424%2C37.993%2C9.538c-9.729.705-19.337%2C1.58-28.952%2C2.431A63.956%2C63.956%2C0%2C0%2C1%2C0%2C12.141a16.958%2C16.958%2C0%2C0%2C1%2C5.183-.957c28.1-2.843%2C74.983-6.212%2C85.416-6.11%22%20transform%3D%22translate(0%20-2.367)%22%20fill%3D%22%23dc94b7%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A");
-}
-
-.summer-style .coordination__subheading .-en {
-  color: #1d4b87;
-}
-
-.summer-style .coordination__subheading .-en::after {
-  width: 100%;
-  height: 1rem;
-  background-repeat: no-repeat;
-  background-position: 50% 0;
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20width%3D%22276.62%22%20height%3D%2214.683%22%20viewBox%3D%220%200%20276.62%2014.683%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3CclipPath%20id%3D%22clip-path%22%3E%0A%20%20%20%20%20%20%3Crect%20id%3D%22%E9%95%B7%E6%96%B9%E5%BD%A2_24869%22%20data-name%3D%22%E9%95%B7%E6%96%B9%E5%BD%A2%2024869%22%20width%3D%22276.49%22%20height%3D%229.859%22%20fill%3D%22%231D4B87%22%2F%3E%0A%20%20%20%20%3C%2FclipPath%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Cg%20id%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97_16935%22%20data-name%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%2016935%22%20transform%3D%22matrix(1%2C%200.017%2C%20-0.017%2C%201%2C%200.172%2C%200)%22%3E%0A%20%20%20%20%3Cg%20id%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97_16934%22%20data-name%3D%22%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%2016934%22%20transform%3D%22translate(0%200)%22%20clip-path%3D%22url(%23clip-path)%22%3E%0A%20%20%20%20%20%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_24190%22%20data-name%3D%22%E3%83%91%E3%82%B9%2024190%22%20d%3D%22M43.405%2C7.577c1.151-.044%2C2.043-.047%2C2.877-.115C57.759%2C6.507%2C69.537%2C5.991%2C81.2%2C5.321c9.948-.573%2C19.971-1.036%2C29.989-1.5%2C10.709-.5%2C21.418-.989%2C32.173-1.378q13-.471%2C26.089-.758c9.937-.208%2C19.884-.288%2C29.819-.366%2C9.068-.071%2C18.138-.282%2C27.242-.067%2C4.32.1%2C8.713-.054%2C13.069-.116%2C1.031-.014%2C2.065-.1%2C3.068-.187C243.513.874%2C244.3.719%2C244.112.4c-.178-.3-.983-.423-1.944-.4-2.261.057-4.525.181-6.786.186-7.7.019-15.4-.017-23.1%2C0-15.394.027-30.794.108-46.126.569q-17.437.523-34.827%2C1.186c-15.091.566-30.176%2C1.139-45.169%2C1.926-12.4.651-24.874%2C1.176-37.134%2C2.057-2.031.146-4.03.344-5.995.562-1.283.142-2%2C.508-1.466.707a13.972%2C13.972%2C0%2C0%2C0%2C1.839.386%22%20transform%3D%22translate(32.348%200)%22%20fill%3D%22%231D4B87%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_24191%22%20data-name%3D%22%E3%83%91%E3%82%B9%2024191%22%20d%3D%22M19.532%2C9.757c1.062.665%2C1.782.32%2C3.369.161%2C2.818-.283%2C5.674-.533%2C8.484-.824C41.8%2C8.018%2C52.384%2C7.126%2C62.857%2C6.1%2C70%2C5.4%2C77.48%2C5.084%2C84.7%2C4.459c1.676-.145%2C3.333-.31%2C4.949-.5.349-.043.682-.254.641-.376s-.515-.285-.9-.314a24.754%2C24.754%2C0%2C0%2C0-3.034-.1c-3.278.171-6.606.316-9.754.62Q59.391%2C5.447%2C42.277%2C7.212q-9.2.931-18.33%2C1.91c-1.441.154-2.779.4-4.415.635%22%20transform%3D%22translate(15.265%20-1.468)%22%20fill%3D%22%231D4B87%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%20%20%3Cpath%20id%3D%22%E3%83%91%E3%82%B9_24192%22%20data-name%3D%22%E3%83%91%E3%82%B9%2024192%22%20d%3D%22M90.6%2C5.074a9.017%2C9.017%2C0%2C0%2C1-2.238.943A42.726%2C42.726%2C0%2C0%2C1%2C84.1%2C6.4C68.732%2C7.443%2C53.316%2C8.424%2C37.993%2C9.538c-9.729.705-19.337%2C1.58-28.952%2C2.431A63.956%2C63.956%2C0%2C0%2C1%2C0%2C12.141a16.958%2C16.958%2C0%2C0%2C1%2C5.183-.957c28.1-2.843%2C74.983-6.212%2C85.416-6.11%22%20transform%3D%22translate(0%20-2.367)%22%20fill%3D%22%231D4B87%22%20fill-rule%3D%22evenodd%22%2F%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A");
 }
 
 .coordination__detail {
@@ -3853,7 +3738,7 @@ main {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: url(../img/school/seifuku/modal_magnify.svg) 100% 100% / contain no-repeat;
+  background: url(/img/modal_magnify.svg) 100% 100% / contain no-repeat;
   z-index: 1;
 }
 
@@ -4477,10 +4362,23 @@ main {
   justify-content: space-between;
   pointer-events: none;
 }
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  animation: slideDown 0.3s ease;
+}
 
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
 @media print, screen and (min-width: 1024px) {
   .seifuku__thumbslider__arrows {
-    top: -1.5rem;
+    top: -2.5rem;
     left: 50%;
     -webkit-transform: translateX(-50%);
     transform: translateX(-50%);
@@ -4488,7 +4386,7 @@ main {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    height: calc(100% + 5.2rem);
+    height: calc(100% + 5.6rem);
   }
 }
 
@@ -4611,7 +4509,7 @@ main {
   transform: translateX(-50%);
   width: 100%;
   height: 100%;
-  background: url(../img/school/seifuku/coordination_deco.svg) 50% 50% / contain no-repeat;
+  background: url(/img/coordination_deco.svg) 50% 50% / contain no-repeat;
 }
 
 @media print, screen and (min-width: 750px) {
@@ -4869,7 +4767,7 @@ main {
 }
 @media print, screen and (min-width: 1024px) {
   .slick-list {
-    max-height: 592px !important;
+    max-height: 666px !important;
   }
 }
 .slick-list:focus {
@@ -4948,7 +4846,7 @@ main {
 }
 /* Slider */
 .slick-loading .slick-list {
-  background: #fff url("./ajax-loader.gif") center center no-repeat;
+  background: #fff url("./img/ajax-loader.gif") center center no-repeat;
 }
 
 /* Icons */

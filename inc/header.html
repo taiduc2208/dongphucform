@@ -1,0 +1,70 @@
+<header class="bg-blue-900 text-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+    <div class="flex items-center justify-between">
+      <!-- Logo Section -->
+      <div class="flex-shrink-0">
+        <a href="#" class="text-2xl font-bold">Thamdongphuc </a>
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="hidden lg:flex space-x-10 text-lg lg:text-base">
+        <a href="/" class="hover:text-gray-300 transition-all">Trang chủ</a>
+        <a href="/#services" class="hover:text-gray-300 transition-all">Mẫu áo</a>
+        <a href="/form.php" class="hover:text-gray-300 transition-all">Đăng ký áo</a>
+        <a href="/link.html" class="hover:text-gray-300 transition-all">Tạo form đăng ký áo</a>
+      </nav>
+
+      <!-- Call-to-Action Button -->
+      <div class="hidden lg:flex lg:flex-col xl:flex-row gap-4 items-center">
+        <a href="#" class="bg-yellow-500 hover:bg-yellow-400 text-black py-2 px-6 rounded-full text-lg text-center transition-all">
+          Nhận báo giá
+        </a>
+        <p>Hotline: 090-3175-2208</p>
+      </div>
+
+      <!-- Mobile Menu Button (for smaller screens) -->
+      <div class="lg:hidden flex items-center">
+        <button id="menu-button" class="text-white focus:outline-none">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <div id="mobile-menu" class="lg:hidden mt-5 hidden space-y-4 text-lg">
+      <a href="/" class="block hover:text-gray-300 transition-all">Trang chủ</a>
+      <a href="/#services" class="block hover:text-gray-300 transition-all">Mẫu áo</a>
+      <a href="/form.php" class="block hover:text-gray-300 transition-all">Đăng ký áo</a>
+      <a href="/link.html" class="block hover:text-gray-300 transition-all">Tạo form đăng ký áo</a>
+      <div class="mt-4">
+        <a href="#" class="bg-yellow-500 hover:bg-yellow-400 text-black py-2 px-6 text-center rounded-full transition-all">
+          Nhận báo giá
+        </a>
+        <p class="py-2">Hotline: 090-3175-2208</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Mobile Menu Toggle
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+  <script>
+    const header = document.querySelector("header");
+    const headerHeight = header.offsetHeight + 50;
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > headerHeight) {
+        header.classList.add("fixed-header");
+      } else {
+        header.classList.remove("fixed-header");
+      }
+    });
+  </script>
+</header>
