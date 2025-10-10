@@ -1,0 +1,23 @@
+name: Auto Deploy to ProFreeHost
+
+on:
+  push:
+    branches:
+      - main   # thay bằng branch bạn muốn deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v3
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          server-dir: /htdocs/   # hoặc thư mục root ProFreeHost của bạn
+          local-dir: ./          # upload toàn bộ code hiện có
